@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* SokoHotel colour tokens. Values are R G B triplets. */
+:root {
+  --color-forest: 0 77 64; /* #004D40 deep forest green */
+  --color-primary: 0 121 107; /* #00796B primary green */
+  --color-action: 32 178 125; /* #20B27D bright action green */
+  --color-ink: 31 41 55; /* #1F2937 main text */
+  --color-muted: 100 116 139; /* #64748B secondary text */
+  --color-canvas: 248 250 252; /* #F8FAFC light background */
+  --color-line: 219 227 234; /* #DBE3EA borders */
+  --color-danger: 185 28 28; /* #B91C1C error red */
+  --color-warn: 180 83 9; /* #B45309 warning amber */
+  --font-inter: "Inter Variable";
+  --font-poppins: "Poppins";
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+    overscroll-behavior-y: none;
+  }
+  h1, h2, h3 {
+    @apply font-display;
+  }
+  button, [role="button"], a {
+    touch-action: manipulation;
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--color-primary));
+    outline-offset: 2px;
+  }
+  input, select, textarea {
+    /* 16px stops iOS Safari zooming into form fields */
+    font-size: 16px;
+  }
+}
+
+@layer components {
+  /* Recolourable glyph made from a supplied black icon (see RoleIcon). */
+  .glyph {
+    display: inline-block;
+    background-color: currentColor;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+  .scroll-hide {
+    scrollbar-width: none;
+  }
+  .scroll-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Receipts and bills print on their own, without app chrome. */
+@media print {
+  body { background: #fff; }
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+}
+.print-only { display: none; }
